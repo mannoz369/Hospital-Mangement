@@ -1,0 +1,121 @@
+<% layout("layouts/boilerplate") %>
+
+<% if (currUser) { %>
+    <div class="container">
+        <hr>
+
+        <form id="searchForm" method="GET" action="/search" class="form-inline">
+            <div class="form-group mb-2">
+                <label for="searchType" class="sr-only">Search Type:</label>
+                <select id="searchType" name="searchType" class="form-control">
+                    <option value="byDate" selected>Search by Date</option>
+                    <option value="byRange">Search by Date Range</option>
+                </select>
+            </div>
+            <span style="margin-right: 1rem;"></span>
+            <div id="singleDateInput" class="form-group mb-2">
+                <label for="searchDate" class="sr-only">Select Date:</label>
+                <input type="date" class="form-control" id="searchDate" name="date" placeholder="Select Date">
+            </div>
+            
+            <div id="dateRangeInput" class="form-group mb-2" style="display: none;">
+                <label for="fromDate" class="sr-only">From Date:</label>
+                <input type="date" class="form-control" id="fromDate" name="from" placeholder="From Date">
+                -
+                <label for="toDate" class="sr-only">To Date:</label>
+                <input type="date" class="form-control" id="toDate" name="to" placeholder="To Date">
+            </div>
+            <span style="margin-right: 0.5rem;"></span>
+            <button type="submit" class="btn-round-full btn-dark btn">Search <i class="icofont-search-document"></i></button>
+        </form>
+
+        <a href="/admin" style="float: right;" class="btn btn-main-2 btn-icon btn-round-full">Back to Today's Appointments</a>
+
+        <% if (patient.length === 0) { %>
+            <div style="margin-top: 2rem;">
+                <h2 class="title-color">NO APPOINTMENTS</h2>
+                <p>No appointments found for the selected date.</p>
+            </div>
+        <% } else { %>
+            <span><h2 class="title-color">All Appointments</h2></span>
+            <p>Total Appointments - <%- patient.length %></p>
+            <div class="row mt-3">
+                <% for (let p of patient) { 
+                    const appointmentDate = new Date(p.Date);
+                    const today = new Date();
+                    today.setHours(0, 0, 0, 0); // Set time to midnight to compare dates without time
+                %>
+                    <div class="card col-4 ms-3 mb-3 service-block">
+                        <div class="card-body">
+                            <h4 class="card-title">Patient Name - <%= p.Name %></h4>
+                            <h6 class="card-title">Doctor - <%= p.doctor %></h6>
+                            <p><b>Date - <%= p.Date %></b></p>
+                            <p>Slot - <%= p.Slot %></p>
+                            <p>Reason - <%= p.reason %></p>
+                            <p><b>Phone no - <%= p.Phone_no %></b></p>
+                            <% if (p.Status === true) { %>
+                                 <p>Status - Not Consulted</p>
+                                 <% if (appointmentDate >= today) { %>
+                                          <form method="POST" action="/listings/<%= p._id %>/cancel" style="display: inline;">
+                                               <button class="btn btn-dark">Cancel</button>
+                                         </form>
+                                  <% } else { %>
+                                         <form method="POST" action="/listings/<%= p._id %>/done" style="display: inline;">
+                                                 <button class="btn btn-success">Mark as Done</button>
+                                         </form>
+                                 <% } %>
+                            <% } else if(p.cancel === true) { %>
+                                <p>Status - Cancelled</p>
+                            <% } else {%>
+                                <p>Status - Consulted</p>
+                            <% }%>
+
+                        </div>
+                    </div>
+                <% } %>
+            </div>
+        <% } %>
+    </div>
+<% } %>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const searchType = document.getElementById('searchType');
+        const singleDateInput = document.getElementById('singleDateInput');
+        const dateRangeInput = document.getElementById('dateRangeInput');
+        const searchForm = document.getElementById('searchForm');
+
+        searchType.addEventListener('change', function () {
+            if (this.value === 'byDate') {
+                singleDateInput.style.display = 'block';
+                dateRangeInput.style.display = 'none';
+            } else if (this.value === 'byRange') {
+                singleDateInput.style.display = 'none';
+                dateRangeInput.style.display = 'block';
+            }
+        });
+
+        document.getElementById('fromDate').addEventListener('change', function() {
+            document.getElementById('toDate').min = this.value;
+        });
+
+        searchForm.addEventListener('submit', function (event) {
+            if (searchType.value === 'byDate') {
+                const searchDate = document.getElementById('searchDate').value;
+                
+                if (!searchDate) {
+                    event.preventDefault();
+                    alert('Please select a date.');
+                }
+            } else if (searchType.value === 'byRange') {
+                const fromDate = document.getElementById('fromDate').value;
+                const toDate = document.getElementById('toDate').value;
+                
+                if (!fromDate || !toDate) {
+                    event.preventDefault();
+                    alert('Please provide both From and To dates.');
+                }
+            }
+        });
+    });
+</script>

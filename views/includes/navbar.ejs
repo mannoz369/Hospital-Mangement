@@ -1,0 +1,88 @@
+<header>
+	<div class="header-top-bar">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-6">
+					<ul class="top-bar-info list-inline-item pl-0 mb-0">
+						<li class="list-inline-item"><a href="mailto:support@blessingclinic.com"><i class="icofont-support-faq mr-2"></i>support@blessingclinic.com</a></li>
+						<li class="list-inline-item"><a href="https://www.google.com/maps/place/Blessings+Clinic/@18.9173826,72.8247122,17z/data=!4m10!1m2!2m1!1sBlessing+well+beign+clinic+colaba+mumbai!3m6!1s0x3be7d195594b2cf7:0x320ff0b23faadc09!8m2!3d18.9164314!4d72.8269687!15sCihCbGVzc2luZyB3ZWxsIGJlaW5nIGNsaW5pYyBjb2xhYmEgbXVtYmFpWioiKGJsZXNzaW5nIHdlbGwgYmVpbmcgY2xpbmljIGNvbGFiYSBtdW1iYWmSAQhob3NwaXRhbJoBI0NoWkRTVWhOTUc5blMwVkpRMEZuU1VSME5qaFFlRlJCRUFF4AEA!16s%2Fg%2F11f03mzmw9?entry=ttu"><i class="icofont-location-pin mr-2"></i>Ground Floor, PUNITA, Shahid Bhagat Singh Rd, Azad Nagar, Colaba, Mumbai</li></a>
+					</ul>
+				</div>
+				<div class="col-lg-6">
+					<div class="text-lg-right top-right-bar mt-2 mt-lg-0">
+						<a href="tel:075060 49824" >
+							<span>Call Now : </span>
+							<span class="h4">075060 49824</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<nav class="navbar navbar-expand-lg navigation" id="navbar">
+		<div class="container">
+		 	 <a class="navbar-brand" href="/listings"  >
+				<img src="images/team/logo1.jpg" alt="" style="height: 5rem; width: 5rem;">
+			  </a>
+
+		  	<button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarmain" aria-controls="navbarmain" aria-expanded="false" aria-label="Toggle navigation">
+			   <span class="icofont-navigation-menu"></span>
+		    </button>
+		  <!-- <span style="margin-left: 12rem;"></span> -->
+		  <div class="collapse navbar-collapse" id="navbarmain">
+			<ul class="navbar-nav ml-auto">
+			  <li class="nav-item active">
+				<a class="nav-link" href="/listings">Home</a>
+			  </li>
+			   <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+			    <li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="/service" >Services <i class="icofont-thin-down"></i></a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown02">
+						<li><a class="dropdown-item" href="/preventive">Preventive Care</a></li>
+						<li><a class="dropdown-item" href="/diagnostic">Diagnostic Services</a></li>
+						<li><a class="dropdown-item" href="/treatment">Treatment Services</a></li>
+						<li><a class="dropdown-item" href="/surgical">Surgical Services</a></li>
+						<li><a class="dropdown-item" href="/specialized">Specialized Services</a></li>
+						<li><a class="dropdown-item" href="/fertility">Fertility Services</a></li>
+					</ul>
+				</li>
+
+			    
+
+			  	<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="/doctor" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Doctors <i class="icofont-thin-down"></i></a>
+					<ul class="dropdown-menu" aria-labelledby="dropdown03">
+						<li><a class="dropdown-item" href="/doctor">Doctors</a></li>
+						<li><a class="dropdown-item" href="/doctor_single">Doctor Single</a></li>
+						
+					</ul>
+			  	</li>
+
+			 
+			   <span style="margin-left: 1rem;"></span>
+			<li style="float: right; display: flex;">
+				
+				
+				<span style="margin-left: 1rem;"></span>
+				<a href="/appointment" class="btn btn-main-2 btn-icon btn-round-full">Appointment</a>
+				<span style="margin-left: 1rem;"></span>
+				<% if(!currUser) {%>
+					<span style="margin-left: 1rem;"></span>
+					<a href="/login" class="btn btn-main-2 btn-icon btn-round-full">Admin</a>
+				<% } %>
+				
+				<% if(currUser) {%>
+					<span style="margin-left: 1rem;"></span>
+					<a href="/admin" class="btn btn-main-2 btn-icon btn-round-full">Check<i class="icofont-check-circled"></i></a>
+					<span style="margin-left: 1rem;"></span>
+					<a href="/logout" class="btn btn-main-2 btn-icon btn-round-full">Logout<i class="icofont-exit"></i></a>
+
+				<% } %>
+			</li>
+			  	
+			</ul>
+																																																																																																							
+		</div>
+		
+	</nav>
+</header>

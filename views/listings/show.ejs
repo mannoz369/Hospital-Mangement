@@ -1,0 +1,45 @@
+<% layout("layouts/boilerplate") %>
+
+<% if(currUser) { %>
+  <div class="container">
+    <hr>
+    <a href="/all" style="float: right;" class="btn btn-main-2 btn-icon btn-round-full">See All Appointments</a>
+    <% 
+    // Get today's date in the same format as the appointment dates
+    const today = new Date();
+    const todayDateString = today.toISOString().split('T')[0];
+
+    // Filter appointments for today
+    const todaysAppointments = patient.filter(p => p.Date === todayDateString && !p.Status);
+
+    if(todaysAppointments.length === 0) { %>
+      <span><h2 class="title-color">No Appointments</h2></span>
+      <p>Schedule for Today</p>
+    <% } else { %>
+      <span><h2 class="title-color">Today’s Appointments</h2></span>
+      <p>Total Appointments - <%- todaysAppointments.length %></p>
+      <div class="row mt-3">
+        <% for(p of todaysAppointments) { %>
+          <% if (p.cancel === false) { %>
+          <div class="card col-4 ms-3 mb-3 service-block">
+            <div class="card-body">
+              <h4 class="card-title">Patient Name - <%= p.Name %></h4>
+              <h6 class="card-title">Doctor - <%= p.doctor %></h6>
+              <p><b>Date - <%= p.Date %></b></p>
+              <p>Slot - <%= p.Slot %></p>
+              <p>Reason - <%= p.reason %></p>
+              <p><b>Phone no - <%= p.Phone_no %></b></p>
+              <form method="POST" action="/listings/<%= p._id %>/cancel" style="display: inline;">
+                <button class="btn btn-dark">Cancel</button>
+              </form>
+              <form method="POST" action="/listings/<%= p._id %>/done" style="display: inline;">
+                <button class="btn btn-success">Mark as Done</button>
+              </form>
+            </div>
+            <% }%>
+          </div>
+        <% } %>
+      </div>
+    <% } %>
+  </div>
+<% } %>

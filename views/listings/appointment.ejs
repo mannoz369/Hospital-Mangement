@@ -1,0 +1,120 @@
+<% layout("layouts/boilerplate") %>
+<section class="page-title bg-1">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="block text-center">
+          <span class="text-white">Book your Seat</span>
+          <h1 class="text-capitalize mb-5 text-lg">Appointment</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="appoinment section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="mt-3">
+          <div class="feature-icon mb-3">
+            <i class="icofont-support text-lg"></i>
+          </div>
+          <span class="h3">Call for an Emergency Service!</span>
+          <h2 class="text-color mt-3">075060 49824</h2>
+        </div>
+      </div> 
+
+      <div class="col-lg-8">
+        <div class="appoinment-wrap mt-5 mt-lg-0 pl-lg-5">
+          <h2 class="mb-2 title-color">Book an appointment</h2>
+          <p class="mb-4">Mollitia dicta commodi est recusandae iste, natus eum asperiores corrupti qui velit. Iste dolorum atque similique praesentium soluta.</p>
+          <form id="appoinment-form" class=" needs-validation appoinment-form" method="POST" action="/listings" novalidate>
+            <div class="row">
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <select name="listing[doctor]" class="form-control" id="exampleFormControlSelect2" required>
+                    <option value="">Select Doctor</option>
+                    <option>Dr. Varsha Patil</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a doctor.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <input name="listing[Date]" id="date" type="date" class="form-control" placeholder="dd/mm/yyyy" min="<%= new Date().toISOString().split('T')[0]%>" required>
+                  <div class="invalid-feedback">
+                    Please select a valid date.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <select name="listing[Slot]" class="form-control" id="exampleFormControlSelect2" required>
+                    <option value="">Select Slot</option>
+                    <option>10:00 AM to 12:00 PM</option>
+                    <option>12:00 PM to 02:00 PM</option>
+                    <option>06:00 PM to 08:00 PM</option>
+                  </select>
+                  <div class="invalid-feedback">
+                    Please select a time slot.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6">
+                <div class="form-group">
+                  <input name="listing[Phone_no]" id="phone" type="tel" class="form-control" placeholder="Phone Number" pattern="[0-9]{10}" required>
+                  <div class="invalid-feedback">
+                    Please enter a valid 10-digit phone number.
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-12">
+                <div class="form-group">
+                  <input name="listing[Name]" id="name" type="text" class="form-control" placeholder="Full Name" required>
+                  <div class="invalid-feedback">
+                    Please enter your full name.
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group-2 mb-4">
+              <textarea name="listing[reason]" id="message" class="form-control" rows="6" placeholder="Your Reason for appointment" required></textarea>
+              <div class="invalid-feedback">
+                Please enter the reason for your appointment.
+              </div>
+            </div>
+            <button class="btn btn-dark add-btn" type="submit">Add</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // JavaScript for custom form validation
+  (function () {
+    'use strict';
+    window.addEventListener('load', function () {
+      var forms = document.getElementsByClassName('needs-validation');
+      Array.prototype.filter.call(forms, function (form) {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  })();
+</script>
